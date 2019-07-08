@@ -4,7 +4,7 @@
 The Rock7 RockBLOCK 9603N in Qwiic format
 
 
-###**! WORK IN PROGRESS !**
+### **! WORK IN PROGRESS !**
 
 ![Dimensions](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Dimensions.png)
 
