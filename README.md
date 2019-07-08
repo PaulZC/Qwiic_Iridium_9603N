@@ -4,7 +4,7 @@
 The Rock7 RockBLOCK 9603N in Qwiic format
 
 
-**! WORK IN PROGRESS !**
+###**! WORK IN PROGRESS !**
 
 ![Dimensions](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Dimensions.png)
 
@@ -15,6 +15,8 @@ The Rock7 RockBLOCK 9603N in Qwiic format
 The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/tree/master/Eagle)
 
 The schematic is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Schematic.png)
+
+The [Arduino folder](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/tree/master/Arduino) contains the **untested** code for the ATtiny84
 
 ## Acknowledgements
 
