@@ -16,7 +16,7 @@ The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qw
 
 The schematic is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Schematic.png)
 
-The BOM is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/Qwiic_RockBLOCK_9603N_BOM.png)
+The BOM is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/Qwiic_RockBLOCK_9603N_BOM.pdf)
 
 The [Arduino folder](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/tree/master/Arduino) contains the **untested** code for the ATtiny84
 
