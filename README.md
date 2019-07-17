@@ -1,24 +1,24 @@
-# Qwiic_RockBLOCK_9603N
+# Qwiic_Iridium_9603N
 
 
-The Rock7 RockBLOCK 9603N in Qwiic format
+A breakout for the Iridium 9603N Short Burst Data Transceiver in Qwiic format with I2C connectivity
 
 
 ### **! WORK IN PROGRESS !**
 
-![Dimensions](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Dimensions.png)
+![Dimensions](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Dimensions.png)
 
-![Top](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Top.JPG)
+![Top](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Top.JPG)
 
-![Bottom](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Bottom.JPG)
+![Bottom](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Bottom.JPG)
 
-The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/tree/master/Eagle)
+The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Eagle)
 
-The schematic is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/img/Schematic.png)
+The schematic is available [here](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Schematic.png)
 
-The BOM is available [here](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/blob/master/Qwiic_RockBLOCK_9603N_BOM.pdf)
+The BOM is available [here](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Qwiic_Iridium_9603N_BOM.pdf)
 
-The [Arduino folder](https://github.com/PaulZC/Qwiic_RockBLOCK_9603N/tree/master/Arduino) contains the **untested** code for the ATtiny84
+The [Arduino folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Arduino) contains the **untested** code for the ATtiny84
 
 ## Acknowledgements
 

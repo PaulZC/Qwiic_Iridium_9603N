@@ -1,5 +1,5 @@
 /*
-  Qwiic RockBLOCK 9603N
+  Qwiic Iridium 9603N
   By: Paul Clark
   Date: 7th July 2019
   
