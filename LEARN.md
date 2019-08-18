@@ -27,7 +27,7 @@ command set to send and receive messages. The I/O pins control its operation. Th
 - Pin 5: enables or disables the 9603N. High enables the 9603N, low disables it.
 - Pin 6: is the serial data transmit _input_. The ATtiny841 serial transmit is connected to this pin.
 - Pin 7: is the serial receive data _output_. This connects to the ATtiny841 serial receive pin.
-- Pin 12: is the Ring Indicator. This pin will pulse high twice when a new 'Mobile Terminated' message is waiting to be downloaded.
+- Pin 12: is the Ring Indicator. This pin will pulse low twice when a new 'Mobile Terminated' message is waiting to be downloaded.
 - Pin 13: is the serial Request To Send input. This needs to be pulled low to allow serial communication to take place.
 - Pin 14: is the serial Data Terminal Ready input. This too need to be pulled low.
 - Pin 19: will be high when the Iridium network is available and the 9603N is able to receive the ring channel.
@@ -134,7 +134,7 @@ The bit definitions for the IO_REG are:
 - Bit 6: Not Used
 - Bit 5: PGOOD - Read Only - this bit will be high when the LTC3225 PGOOD signal is high
 - Bit 4: NA - Read Only - this bit will be high when the 9603N Network Available pin is high
-- Bit 3: RI - Read/Write - this bit is a flag which is set when the 9603N Ring Indicator pin pulses high. The flag can be cleared by writing a 0 to this bit
+- Bit 3: RI - Read/Write - this bit is a flag which is set when the 9603N Ring Indicator pin pulses low. The flag can be cleared by writing a 0 to this bit
 - Bit 2: ON_OFF - Read/Write - this bit controls the 9603N on/off pin (Pin 5). Writing a 1 to this bit enables the 9603N
 - Bit 1: PWR_EN - Read/Write - this bit controls the PWR_EN signal which enables power to the 9603N via the P-FET. Writing 1 to this bit enables the 9603N power
 - Bit 0: SHDN - Read/Write - this bit controls the LTC3225 !SHDN signal to enable/disable the supercapacitor charger. Writing 1 to this bit enables the LTC3225

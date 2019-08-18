@@ -40,7 +40,7 @@
   6:  Physical Pin 7  (PA6 / MOSI/SDA): I2C SDA
   7:  Physical Pin 6  (PA7)           : 9603N Network Available - high when the 9603 can successfully receive the Ring Channel
   8:  Physical Pin 5  (PB2)           : LTC3225 Power Good - goes high when the supercapacitors are charged (will also be high when !SHDN is low!)
-  9:  Physical Pin 3  (PB1 / INT0)    : 9603N Ring Indicator - will pulse high twice when a new Mobile Terminated SBD message is available
+  9:  Physical Pin 3  (PB1 / INT0)    : 9603N Ring Indicator - will pulse low twice when a new Mobile Terminated SBD message is available
   10: Physical Pin 2  (PB0)           : LTC3225 !SHDN - pull low to disable the supercapacitor charger
   11: Physical Pin 4  (!RESET / PB3)  : ATtiny841 !Reset
 
@@ -122,7 +122,7 @@ const byte RXPIN = 2; // Serial Rx pin
 const byte PWR_EN = 3; // PWR_EN - pull high to enable the 5.3V supply to the 9603N via the P-FET
 const byte NA = 7; // 9603N Network Available - high when the 9603 can successfully receive the Ring Channel
 const byte PGOOD = 8; // LTC3225 Power Good - goes high when the supercapacitors are charged (will also be high when !SHDN is low!)
-const byte RI = 9; // 9603N Ring Indicator - will pulse high twice when a new Mobile Terminated SBD message is available
+const byte RI = 9; // 9603N Ring Indicator - will pulse low twice when a new Mobile Terminated SBD message is available
 const byte SHDN = 10; // LTC3225 !SHDN - pull high to enable the supercapacitor charger
 
 //Define the ON and OFF states for each pin
@@ -138,7 +138,7 @@ const byte SHDN = 10; // LTC3225 !SHDN - pull high to enable the supercapacitor 
 #define PGOOD__OFF  LOW
 
 //INT0 Interrupt Service Routine
-//Called on the RISING edge of the RI pin
+//Called on the FALLING edge of the RI pin
 void int0ISR() { RI_FLAG = true; } // Set RI_FLAG to true
 
 void setup()
@@ -164,7 +164,7 @@ void setup()
   pinMode(RXPIN, INPUT); // Rx pin
 
   // Enable RI interrupts
-  attachInterrupt(0, int0ISR, RISING); // Attach the INT0 interrupt, rising edge (ATTinyCore requires the pin number to be 0)
+  attachInterrupt(0, int0ISR, FALLING); // Attach the INT0 interrupt, falling edge (ATTinyCore requires the pin number to be 0)
 
   // Open serial communication with the 9603N
   Serial.begin(19200); //9603N communicates at 19200bps
