@@ -140,6 +140,20 @@ The bit definitions for the IO_REG are:
 - Bit 0: SHDN - Read/Write - this bit controls the LTC3225 !SHDN signal to enable/disable the supercapacitor charger. Writing 1 to this bit enables the LTC3225
 
 When writing to the IO_REG, you will need to use a read-modify-write approach: read the IO_REG, set or clear the appropriate bit, write the value back to the IO_REG.
+E.g. to enable the LTC3225, the Master needs to:
+
+```
+Wire.beginTransmission(0x63); // Open communication with the Qwiic Iridium 9603N
+Wire.write(0x10); // Point to the IO register
+Wire.endTransmission(); // Send data and release the bus
+Wire.requestFrom(0x63, 1); // Request one byte from the IO register
+uint8_t io_pins = Wire.read(); // Read the IO register
+io_pins |= 0x01; // Set the SHDN bit to enable the LTC3225
+Wire.beginTransmission(0x63); // Open communication with the Qwiic Iridium 9603N
+Wire.write(0x10); // Point to the IO register
+Wire.write(io_pins); // Update the pins
+Wire.endTransmission(); // Send data and release the bus
+```
 
 ### LEN_REG
 
