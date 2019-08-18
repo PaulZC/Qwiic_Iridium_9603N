@@ -58,11 +58,11 @@ The LTC3225 charge current is adjustable up to a maximum of 150mA. When set to t
 drawn by the 9603N during transmit. This means that 1 Farad supercapacitors are adequate as they only need to hold enough charge to meet the
 9603N's peak current draw during the very brief (8.3ms) transmit bursts.
 
-The LTC3225 has an efficiency of approximately 75% when powered by 3.3V. This means the average current drawn from the Qwiic interface is
-approximately 200mA during a receive/transmit cycle.
+The LTC3225 has an efficiency of approximately 75% when powered from 3.3V. This means the current drawn from the Qwiic interface is
+approximately 200mA when charging the supercapacitors.
 
-If you want to power the Qwiic Iridium 9603N from a low current source, e.g. solar panels, then the charge current can be reduced to 60mA by
-changing the JP1 jumper link. The average current draw from the Qwiic interface falls to approximately 80mA. The 60mA charge current is enough
+If you want to power the Qwiic Iridium 9603N from a low current source, e.g. solar panels, the charge current can be reduced to 60mA by
+changing the JP1 jumper link. The current draw from the Qwiic interface falls to approximately 80mA. The 60mA charge current is enough
 to offset the average current draw during receive, but bigger supercapacitors are needed to deliver the average current draw during a complete
 receive/transmit cycle. So, if you do change the charge current to 60mA, you will also need to solder additional 10 Farad supercapacitors on to
 the rear of the PCB using the solder pads provided. Please see the BOM for the capacitor part numbers.
@@ -71,8 +71,8 @@ The connections between the LTC3225 and the ATtiny841 are:
 
 - !SHDN (LTC3225 Pin 6) is used to enable or disable the LTC3225. Pulling this pin high enables it, low disables it.
 - PGOOD (LTC3225 Pin 5) goes high when the supercapacitors are 94% charged. This pin is used to illuminated LED2; LED2 lights up when the capacitors
-are charging.
-- PWR_EN is a signal from the ATtiny841 which enables a P-channel FET to switch power to the 9603N. Pulling PWR_EN high enables power, low disables it.
+are _charging_.
+- PWR_EN is a signal from the ATtiny841 which enables a P-channel FET (Q1) to switch power to the 9603N. Pulling PWR_EN high enables 9603N power, low disables it.
 
 The power-up sequence is:
 
@@ -89,10 +89,10 @@ Qwiic Iridium 9603N. The library contains several examples too. The power contro
 
 ## ATtiny841
 
-![LTC3225](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225.JPG)
+![ATtiny841](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/ATtiny841.JPG)
 
 The ATtiny841 is an enhanced version of the popular ATtiny84. It includes hardware support for both I2C and Serial which is vital when using it as an
-I2C to Serial bridge.
+I2C to Serial bridge. (Software serial isn't up to the job.)
 
 Spence Konde has written a comprehensive library called [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) which provides full support for the ATtiny841.
 **At the time of writing, you will need to download ATTinyCore directly from GitHub as the version in Arduino Board Manager does not yet include
@@ -103,7 +103,7 @@ the Qwiic Iridium 9603N. They do all of the heavy lifting for you. However, the 
 so you can develop your own Wire functions should you want to.
 
 The Qwiic Iridium 9603N emulates a slave I2C device with a fixed address of 0x63. You can change the address but only by editing the
-[Arduino code](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Arduino).
+[Arduino code](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Arduino/Qwiic_Iridium_9603N_ATtiny841/Qwiic_Iridium_9603N_ATtiny841.ino#L90).
 
 The code in the ATtiny841 emulates three read/write 'registers':
 
@@ -161,7 +161,7 @@ if (Wire.available() >= 2)
 }
 ```
 
-Reading serial data from the DATA_REG needs to be done eight bytes at a time, if there are more than eight bytes available, due to limitations in the way the
+Reading serial data from the DATA_REG needs to be done eight bytes at a time (if there are more than eight bytes available) due to limitations in the way the
 way Wire.onRequest works. See below for details.
 
 ### DATA_REG
@@ -206,23 +206,26 @@ while (bytesAvailable > 8) // If there are more than 8 bytes waiting to be read
   }
   bytesAvailable -= 8; // Decrease bytesAvailable by 8
 }
-Wire.requestFrom(0x63, bytesAvailable); // Request the remaining bytes from the data register
-while (Wire.available())
+if (bytesAvailable > 0) // If there are some bytes waiting to be read
 {
-  uint8_t data_byte = Wire.read(); // Read the data
-  // Store the data byte 
+  Wire.requestFrom(0x63, bytesAvailable); // Request the remaining bytes from the data register
+  while (Wire.available())
+  {
+    uint8_t data_byte = Wire.read(); // Read the data
+    // Store the data byte 
+  }
 }
 ```
 
 The code in the ATtiny keeps its own copy of how many bytes were in the serial buffer when the length register was read, so it knows how many bytes to send
-to the Master even if more serial data from the 9603N arrives part way through.
+to the Master even if new serial data from the 9603N arrives part way through.
 
 ## ATTinyCore
 
 The [Arduino folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Arduino) contains the code for the ATtiny841.
 
 The Qwiic Iridium 9603N relies upon Spence Konde's [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) to provide support for the ATtiny841.
-**At the time of writing, you will need to download ATTinyCore directly from GitHub as the version in Arduino Board Manager does not yet include
+**At the time of writing, you will also need to download ATTinyCore directly from GitHub as the version in the Arduino Board Manager does not yet include
 [one important fix](https://github.com/SpenceKonde/ATTinyCore/commit/0d17000a645234bb540b82086debf39ccb87f172) which the Qwiic Iridium 9603N needs.**
 
 When compiling the code:
