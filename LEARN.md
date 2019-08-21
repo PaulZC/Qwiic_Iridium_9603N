@@ -36,7 +36,7 @@ The ATtiny is connected to the I/O pins to form an I2C to serial bridge.
 
 The full AT command reference can be found [here](http://www.rock7mobile.com/downloads/IRDM_ISU_ATCommandReferenceMAN0009_Rev2.0_ATCOMM_Oct2012.pdf).
 
-## LTC3225 Supercapacitor Charger
+## LTC3225 Supercapacitor Charger and ADM4210 Current Limiter
 
 ![LTC3225](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225.JPG)
 
@@ -51,7 +51,7 @@ The 9603N requires a power input of 5VDC +/- 0.5V. The power consumption at 5VDC
 - The average current draw during a complete receive/transmit cycle is 158mA
 
 The Qwiic Iridium 9603N uses an [LTC3225](https://www.analog.com/en/products/ltc3225.html) supercapacitor charger to meet these power needs.
-When powered by 3.3V from the Qwiic interface, it can charge a pair of supercapacitors to 5.3V. These capacitors deliver the 1.3A peak
+When powered by 3.3V from the Qwiic interface, it charges a pair of supercapacitors to 5.3V. These capacitors deliver the 1.3A peak
 current draw when the 9603N transmits.
 
 The LTC3225 charge current is adjustable up to a maximum of 150mA. When set to the full 150mA, the LTC3225 can match the 145mA average current
@@ -67,23 +67,28 @@ to offset the average current draw during receive, but bigger supercapacitors ar
 receive/transmit cycle. So, if you do change the charge current to 60mA, you will also need to solder additional 10 Farad supercapacitors on to
 the rear of the PCB using the solder pads provided. Please see the BOM for the capacitor part numbers.
 
-The connections between the LTC3225 and the ATtiny841 are:
+The datasheet for the 9603N states that it can have a very low impedance when unpowered, leading to a large inrush current when the power is enabled.
+The power supply circuit needs to limit the inrush current to a maximum of 4 Amps. To achieve this, the Qwiic Iridium 9603N uses an
+[ADM4210-1](https://www.analog.com/en/products/adm4210.html) which can sense the current via R9 and limit it by changing Q1's Gate voltage.
+The ADM4210 will limit the current when the voltage across R9 exceeds 50mV (4 Amps * 0.012 Ohms).
 
-- !SHDN (LTC3225 Pin 6) is used to enable or disable the LTC3225. Pulling this pin high enables it, low disables it.
-- PGOOD (LTC3225 Pin 5) goes high when the supercapacitors are 94% charged. This pin is used to illuminated LED2; LED2 lights up when the capacitors
+The connections between the ATtiny841, LTC3225 and the ADM4210 are:
+
+- !SHDN (LTC3225 Pin 6, ATtiny Pin 2) is used to enable or disable the LTC3225. Pulling this pin high enables it, low disables it.
+- PGOOD (LTC3225 Pin 5, ATtiny Pin 5) goes high when the supercapacitors are 94% charged. This pin is used to illuminated LED D2; D2 lights up when the capacitors
 are _charging_.
-- PWR_EN is a signal from the ATtiny841 which enables a P-channel FET (Q1) to switch power to the 9603N. Pulling PWR_EN high enables 9603N power, low disables it.
+- PWR_EN (ADM4210 Pin 3, ATtiny Pin 10) is used to enable or disable the ADM4210. Pulling PWR_EN high enables power for the 9603N, low disables it.
 
 The power-up sequence is:
 
 - Enable the LTC3225 by pulling !SHDN high
-- Wait until PGOOD goes high (LED2 goes out)
+- Wait until PGOOD goes high (LED D2 goes out)
 - Enable 9603N power by pulling PWR_EN high
 
 [This fork of Mikal Hart's Iridium SBD library](https://github.com/PaulZC/IridiumSBD) contains all of the functions you need to control the
-Qwiic Iridium 9603N. The library contains several examples too. The power control functions are:
+Qwiic Iridium 9603N. The library contains several I2C examples. The power control functions are:
 
-- _enableSuperCapCharger(true)_ will enable the LTC3225
+- _enableSuperCapCharger(true)_ will enable the LTC3225 by pulling !SHDN high
 - _checkSuperCapCharger()_ will return true when PGOOD has gone high
 - _enable9603Npower(true)_ will enable power for the 9603N by pulling PWR_EN high
 
@@ -95,11 +100,11 @@ The ATtiny841 is an enhanced version of the popular ATtiny84. It includes hardwa
 I2C to Serial bridge. (Software serial isn't up to the job.)
 
 Spence Konde has written a comprehensive library called [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) which provides full support for the ATtiny841.
-**At the time of writing, you will need to download ATTinyCore directly from GitHub as the version in Arduino Board Manager does not yet include
-[one important fix](https://github.com/SpenceKonde/ATTinyCore/commit/0d17000a645234bb540b82086debf39ccb87f172) which the Qwiic Iridium 9603N needs.**
+You will need to use version 1.3.0 of the library (or later) as it includes
+[one important fix](https://github.com/SpenceKonde/ATTinyCore/commit/0d17000a645234bb540b82086debf39ccb87f172) which the Qwiic Iridium 9603N needs.
 
 [The Iridium SBD library](https://github.com/PaulZC/IridiumSBD) contains high level functions which you can call to control and communicate with
-the Qwiic Iridium 9603N. They do all of the heavy lifting for you. However, the following will be useful if you want to understand how the I2C interface works
+the Qwiic Iridium 9603N. They do all of the heavy lifting for you. However, the following sections will be useful if you want to understand how the I2C interface works
 so you can develop your own Wire functions should you want to.
 
 The Qwiic Iridium 9603N emulates a slave I2C device with a fixed address of 0x63. You can change the address but only by editing the
