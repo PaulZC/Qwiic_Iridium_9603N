@@ -23,7 +23,7 @@ The key components of the Qwiic Iridium 9603N are:
 The 9603N transceiver is a 5V device but has 3.3V serial (UART) and Input/Ouput pins. The serial interface uses an old-school "AT"
 command set to send and receive messages. The I/O pins control its operation. The Qwiic Iridium 9603N connects to:
 
-- Pins 1 & 2: these are connected to the 5.3V supply from the supercapacitors via a P-FET switch.
+- Pins 1 & 2: these are connected to the 5.3V supply from the supercapacitors via the ADM4210 and N-FET.
 - Pin 5: enables or disables the 9603N. High enables the 9603N, low disables it.
 - Pin 6: is the serial data transmit _input_. The ATtiny841 serial transmit is connected to this pin.
 - Pin 7: is the serial receive data _output_. This connects to the ATtiny841 serial receive pin.
@@ -141,7 +141,7 @@ The bit definitions for the IO_REG are:
 - Bit 4: NA - Read Only - this bit will be high when the 9603N Network Available pin is high
 - Bit 3: RI - Read/Write - this bit is a flag which is set when the 9603N Ring Indicator pin pulses low. The flag can be cleared by writing a 0 to this bit
 - Bit 2: ON_OFF - Read/Write - this bit controls the 9603N on/off pin (Pin 5). Writing a 1 to this bit enables the 9603N
-- Bit 1: PWR_EN - Read/Write - this bit controls the PWR_EN signal which enables power to the 9603N via the P-FET. Writing 1 to this bit enables the 9603N power
+- Bit 1: PWR_EN - Read/Write - this bit controls the PWR_EN signal which enables power to the 9603N via the ADM4210. Writing 1 to this bit enables the 9603N power
 - Bit 0: SHDN - Read/Write - this bit controls the LTC3225 !SHDN signal to enable/disable the supercapacitor charger. Writing 1 to this bit enables the LTC3225
 
 When writing to the IO_REG, you will need to use a read-modify-write approach: read the IO_REG, set or clear the appropriate bit, write the value back to the IO_REG.
@@ -244,8 +244,8 @@ to the Master even if new serial data from the 9603N arrives part way through.
 The [Arduino folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Arduino) contains the code for the ATtiny841.
 
 The Qwiic Iridium 9603N relies upon Spence Konde's [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) to provide support for the ATtiny841.
-**At the time of writing, you will also need to download ATTinyCore directly from GitHub as the version in the Arduino Board Manager does not yet include
-[one important fix](https://github.com/SpenceKonde/ATTinyCore/commit/0d17000a645234bb540b82086debf39ccb87f172) which the Qwiic Iridium 9603N needs.**
+You will need to use version 1.3.0 of the library (or later) as it includes
+[one important fix](https://github.com/SpenceKonde/ATTinyCore/commit/0d17000a645234bb540b82086debf39ccb87f172) which the Qwiic Iridium 9603N needs.
 
 When compiling the code:
 - Set Board to ATtiny441/841 (No bootloader)
