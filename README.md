@@ -20,6 +20,10 @@ The [Arduino folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/A
 
 At the time of writing, you will need to use [this fork of Mikal Hart's Iridium SBD library](https://github.com/PaulZC/IridiumSBD) to provide
 I2C support and examples of how to interface the Qwiic Iridium 9603N to other Qwiic devices.
+The Beacon_I2C example demonstrates how to interface the Qwiic Iridium 9603N with (e.g.) a [SparkFun SAM-M8Q breakout](https://www.sparkfun.com/products/15210)
+or [ZOE-M8Q breakout](https://www.sparkfun.com/products/15193) to form an I2C GPS + Iridium beacon or tracker
+
+![Beacon_I2C](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Beacon_I2C.JPG)
 
 The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qwiic_Iridium_9603N/tree/master/Eagle).
 

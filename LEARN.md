@@ -86,7 +86,13 @@ The power-up sequence is:
 - Enable 9603N power by pulling PWR_EN high
 
 [This fork of Mikal Hart's Iridium SBD library](https://github.com/PaulZC/IridiumSBD) contains all of the functions you need to control the
-Qwiic Iridium 9603N. The library contains several I2C examples. The power control functions are:
+Qwiic Iridium 9603N. The library contains several I2C examples including "Beacon_I2C" which demonstrates how to interface the Qwiic Iridium 9603N with
+(e.g.) a [SparkFun SAM-M8Q breakout](https://www.sparkfun.com/products/15210)
+or [ZOE-M8Q breakout](https://www.sparkfun.com/products/15193) to form an I2C GPS + Iridium beacon or tracker.
+
+![Beacon_I2C](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Beacon_I2C.JPG)
+
+The power control functions in the library are:
 
 - _enableSuperCapCharger(true)_ will enable the LTC3225 by pulling !SHDN high
 - _checkSuperCapCharger()_ will return true when PGOOD has gone high
