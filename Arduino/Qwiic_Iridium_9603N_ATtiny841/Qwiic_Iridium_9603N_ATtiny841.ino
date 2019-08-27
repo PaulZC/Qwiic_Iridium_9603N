@@ -149,10 +149,10 @@ void setup()
   pinMode(PWR_EN, OUTPUT);
   digitalWrite(PWR_EN, PWR_EN__OFF); // Disable power to the 9603N until PGOOD has gone high
   pinMode(SHDN, OUTPUT);
-  digitalWrite(SHDN, SHDN__ON); // Enable the LTC3225 and charge the supercapacitors
+  digitalWrite(SHDN, SHDN__OFF); // Disable the LTC3225 supercapacitor charger
 
   // Initialize the IO_REGISTER
-  IO_REGISTER = IO_SHDN; // Set (only) the SHDN bit in the IO register (Probably redundant. Reading the IO_REG will update it.)
+  IO_REGISTER = 0; // Clear the IO register (Probably redundant. Reading the IO_REG will update it.)
 
   // Digital inputs
   pinMode(PGOOD, INPUT); // Has its own pullup
