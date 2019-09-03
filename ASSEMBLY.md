@@ -15,7 +15,7 @@ My recommended options are:
 - Material: FR4, 1.55mm
 - Cu layers: 35um
 - Solder stop: both sides, green
-- Marking print: both side, white
+- Marking print: both sides, white
 
 ![Assembly1](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Assembly1.JPG)
 

@@ -42,8 +42,6 @@ The full AT command reference can be found [here](http://www.rock7mobile.com/dow
 
 ![LTC3225](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225.JPG)
 
-![LTC3225_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225_2.JPG)
-
 The 9603N requires a power input of 5VDC +/- 0.5V. The power consumption at 5VDC is:
 
 - 34mA average when idle
@@ -57,6 +55,8 @@ The 9603N requires a power input of 5VDC +/- 0.5V. The power consumption at 5VDC
 The Qwiic Iridium 9603N uses an [LTC3225](https://www.analog.com/en/products/ltc3225.html) supercapacitor charger to meet these power needs.
 When powered by 3.3V from the Qwiic interface, it charges a pair of supercapacitors to 5.3V. These capacitors deliver the 1.3A peak
 current draw when the 9603N transmits.
+
+![LTC3225_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225_2.JPG)
 
 The LTC3225 charge current is adjustable up to a maximum of 150mA. When set to the full 150mA, the LTC3225 can match the 145mA average current
 drawn by the 9603N during transmit. This means that 1 Farad supercapacitors are adequate as they only need to hold enough charge to meet the
