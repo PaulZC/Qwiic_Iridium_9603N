@@ -1,11 +1,11 @@
 # Qwiic_Iridium_9603N: LEARN
 
-![Qwiic_Iridium_9603N_1](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Qwiic_Iridium_9603N_1.JPG)
+![Qwiic_Iridium_9603N_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Qwiic_Iridium_9603N_2.JPG)
 
 ## What is it?
 
 The Qwiic Iridium 9603N is a breakout for the [Iridium 9603N Short Burst Data transceiver](https://www.iridium.com/products/iridium-9603/)
-which can be used to send and receive 'short' messages (340 bytes transmitted, 270 bytes received) to and from _anywhere_ on Earth.
+which can be used to send and receive _short_ messages (340 bytes transmitted, 270 bytes received) to and from _anywhere_ on Earth.
 The 9603N is the heart of the [Iridium 9603 Beacon](https://github.com/PaulZC/Iridium_9603_Beacon),
 the [Iridium 9603N Solar Beacon](https://github.com/PaulZC/Iridium_9603N_Solar_Beacon) and the
 [Rock7 RockBLOCK 9603](http://www.rock7mobile.com/products-rockblock-9603).
@@ -34,11 +34,15 @@ command set to send and receive messages. The I/O pins control its operation. Th
 
 The ATtiny is connected to the I/O pins to form an I2C to serial bridge.
 
+![9603_Pins_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/9603_Pins_2.JPG)
+
 The full AT command reference can be found [here](http://www.rock7mobile.com/downloads/IRDM_ISU_ATCommandReferenceMAN0009_Rev2.0_ATCOMM_Oct2012.pdf).
 
 ## LTC3225 Supercapacitor Charger and ADM4210 Current Limiter
 
 ![LTC3225](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225.JPG)
+
+![LTC3225_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/LTC3225_2.JPG)
 
 The 9603N requires a power input of 5VDC +/- 0.5V. The power consumption at 5VDC is:
 
@@ -72,6 +76,8 @@ The power supply circuit needs to limit the inrush current to a maximum of 4 Amp
 [ADM4210-1](https://www.analog.com/en/products/adm4210.html) which can sense the current via R9 and limit it by changing Q1's Gate voltage.
 The ADM4210 will limit the current when the voltage across R9 exceeds 50mV (4 Amps * 0.012 Ohms).
 
+![ADM4210](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/ADM4210.JPG)
+
 The connections between the ATtiny841, LTC3225 and the ADM4210 are:
 
 - !SHDN (LTC3225 Pin 6, ATtiny Pin 2) is used to enable or disable the LTC3225. Pulling this pin high enables it, low disables it.
@@ -102,6 +108,8 @@ The power control functions in the library are:
 
 ![ATtiny841](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/ATtiny841.JPG)
 
+![ATtiny841_2](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/ATtiny841_2.JPG)
+
 The ATtiny841 is an enhanced version of the popular ATtiny84. It includes hardware support for both I2C and Serial which is vital when using it as an
 I2C to Serial bridge. (Software serial isn't up to the job.)
 
@@ -112,6 +120,8 @@ You will need to use version 1.3.0 of the library (or later) as it includes
 [The Iridium SBD library](https://github.com/PaulZC/IridiumSBD) contains high level functions which you can call to control and communicate with
 the Qwiic Iridium 9603N. They do all of the heavy lifting for you. However, the following sections will be useful if you want to understand how the I2C interface works
 so you can develop your own Wire functions should you want to.
+
+## I2C (Wire) Interface
 
 The Qwiic Iridium 9603N emulates a slave I2C device with a fixed address of 0x63. You can change the address but only by editing the
 [Arduino code](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Arduino/Qwiic_Iridium_9603N_ATtiny841/Qwiic_Iridium_9603N_ATtiny841.ino#L90).
@@ -150,7 +160,7 @@ The bit definitions for the IO_REG are:
 - Bit 1: PWR_EN - Read/Write - this bit controls the PWR_EN signal which enables power to the 9603N via the ADM4210. Writing 1 to this bit enables the 9603N power
 - Bit 0: SHDN - Read/Write - this bit controls the LTC3225 !SHDN signal to enable/disable the supercapacitor charger. Writing 1 to this bit enables the LTC3225
 
-When writing to the IO_REG, you will need to use a read-modify-write approach: read the IO_REG, set or clear the appropriate bit, write the value back to the IO_REG.
+When writing to the IO_REG, you will need to use a read-modify-write approach: read the IO_REG, set or clear the appropriate bit(s), write the value back to the IO_REG.
 E.g. to enable the LTC3225, the Master needs to:
 
 ```
@@ -274,10 +284,10 @@ to configure the ATtiny841:
 - Configure an Arduino board as an _Arduino as ISP_ programmer
 - Connect the Arduino and use AVRDUDESS to program the ATTiny841 with the .hex file via the ISP header
 
-The ATtiny841 is delivered with the CKDIV8 bit programmed, which will make the 841 run at 1MHz instead of 8MHz. You will need to use AVRDUDESS to read and then
+The ATtiny841 is delivered with the CKDIV8 bit programmed, which will make the 841 run at 1MHz instead of 8MHz. You will need to use (e.g.) AVRDUDESS to read and then
 set the fuses to correct this:
 
-- Set the L (Low) fuse byte to **0xE2**
+- Set the L (Low) fuse byte to **0xC2**
 - Set the H (High) fuse byte to 0xDF
 - Set the E (Extended) fuse byte to 0xFF
 

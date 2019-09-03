@@ -6422,9 +6422,9 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 <attribute name="NAME" x="41.402" y="36.068" size="0.8128" layer="25" font="vector" ratio="18" rot="R270" align="bottom-center"/>
 <attribute name="PROD_ID" value="CAP-00867" x="40.513" y="35.941" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="C10" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" package="0603" package3d_urn="urn:adsk.eagle:package:37414/1" value="0.22uF" x="33.147" y="33.401" smashed="yes">
+<element name="C10" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" package="0603" package3d_urn="urn:adsk.eagle:package:37414/1" value="1.0uF" x="33.147" y="33.401" smashed="yes">
 <attribute name="NAME" x="33.147" y="31.75" size="0.8128" layer="25" font="vector" ratio="18" align="bottom-center"/>
-<attribute name="PROD_ID" value="CAP-07822" x="33.147" y="33.401" size="1.778" layer="27" display="off"/>
+<attribute name="PROD_ID" value="CAP-00868" x="33.147" y="33.401" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R14" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="0603" package3d_urn="urn:adsk.eagle:package:39650/1" value="10k" x="39.624" y="32.385" smashed="yes">
 <attribute name="NAME" x="36.957" y="32.004" size="0.8128" layer="25" font="vector" ratio="18" align="bottom-center"/>
@@ -6825,10 +6825,10 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 <wire x1="23.495" y1="22.733" x2="24.765" y2="24.003" width="0.3048" layer="1"/>
 <wire x1="24.765" y1="24.003" x2="24.765" y2="25.781" width="0.3048" layer="1"/>
 <via x="21.463" y="29.337" extent="1-16" drill="0.4"/>
-<wire x1="21.463" y1="29.337" x2="23.622" y2="29.337" width="0.3048" layer="16"/>
-<via x="23.622" y="29.337" extent="1-16" drill="0.4"/>
-<wire x1="23.622" y1="29.337" x2="23.749" y2="29.464" width="0.3048" layer="1"/>
-<wire x1="23.749" y1="31.115" x2="23.749" y2="29.464" width="0.3048" layer="1"/>
+<wire x1="21.463" y1="29.337" x2="23.368" y2="29.337" width="0.3048" layer="16"/>
+<via x="23.368" y="29.337" extent="1-16" drill="0.4"/>
+<wire x1="23.368" y1="29.337" x2="23.749" y2="29.718" width="0.3048" layer="1"/>
+<wire x1="23.749" y1="31.115" x2="23.749" y2="29.718" width="0.3048" layer="1"/>
 <wire x1="24.765" y1="25.781" x2="21.463" y2="29.083" width="0.3048" layer="1"/>
 <wire x1="21.463" y1="29.083" x2="21.463" y2="29.337" width="0.3048" layer="1"/>
 <contactref element="TX" pad="P$1"/>
@@ -6992,14 +6992,14 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 <wire x1="26.035" y1="21.85" x2="26.035" y2="23.368" width="0.3048" layer="1"/>
 <wire x1="26.035" y1="23.368" x2="26.416" y2="23.749" width="0.3048" layer="1"/>
 <wire x1="26.416" y1="23.749" x2="26.416" y2="26.162" width="0.3048" layer="1"/>
-<wire x1="24.765" y1="27.813" x2="24.765" y2="29.337" width="0.3048" layer="1"/>
-<via x="24.765" y="29.337" extent="1-16" drill="0.4"/>
-<wire x1="24.765" y1="29.337" x2="28.956" y2="33.528" width="0.3048" layer="16"/>
+<wire x1="24.892" y1="27.686" x2="24.892" y2="30.48" width="0.3048" layer="1"/>
+<via x="24.892" y="30.48" extent="1-16" drill="0.4"/>
+<wire x1="24.892" y1="30.48" x2="27.94" y2="33.528" width="0.3048" layer="16"/>
 <via x="36.068" y="33.528" extent="1-16" drill="0.4"/>
 <wire x1="36.068" y1="33.528" x2="34.986" y2="34.61" width="0.3048" layer="1"/>
 <wire x1="34.986" y1="34.61" x2="34.986" y2="35.657" width="0.3048" layer="1"/>
-<wire x1="26.416" y1="26.162" x2="24.765" y2="27.813" width="0.3048" layer="1"/>
-<wire x1="28.956" y1="33.528" x2="36.068" y2="33.528" width="0.3048" layer="16"/>
+<wire x1="26.416" y1="26.162" x2="24.892" y2="27.686" width="0.3048" layer="1"/>
+<wire x1="27.94" y1="33.528" x2="36.068" y2="33.528" width="0.3048" layer="16"/>
 <contactref element="R14" pad="1"/>
 <wire x1="38.774" y1="32.385" x2="38.735" y2="32.385" width="0.3048" layer="1"/>
 <wire x1="38.735" y1="32.385" x2="37.592" y2="33.528" width="0.3048" layer="1"/>
