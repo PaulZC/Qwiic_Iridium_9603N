@@ -141,12 +141,17 @@ Finally, program the ATtiny841 with the hex file and your board is ready for use
 I recommend securing J1 to the PCB with a small amount of epoxy to make it more robust. 3M Scotch-Weld 2216 is an ideal choice as it remains slightly flexible when cured.
 You will need to temporarily remove the 9603N while you apply the epoxy. Apply the mixed epoxy around the body and legs of J1 using a toothpick,
 taking great care to keep the epoxy clear of the connector opening and pins. Make sure the epoxy is fully cured before re-installing the 9603N.
+_Avoid using hard epoxy as this could shrink when curing and break the solder joints._
+
+![Assembly13](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Assembly13.JPG)
 
 ### Lacquer the PCB
 
 I recommend giving the PCB a coat of lacquer, especially if you are intending to use it to track a balloon flight.
 You will need to temporarily remove the 9603N while you apply the lacquer. Cover all of the surface mount components with
 [Acrylic Protective Lacquer (conformal coating)](https://uk.rs-online.com/web/p/conformal-coatings/3217324/) except: J1, J7, the jumper links and the IO pads.
+
+![Assembly14](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Assembly14.JPG)
 
 Once the lacquer is dry, re-attach the 9603N and your board is ready to fly.
 
