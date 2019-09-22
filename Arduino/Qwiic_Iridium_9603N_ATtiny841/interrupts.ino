@@ -40,6 +40,8 @@ void receiveEvent(int numberOfBytesReceived) {
         if ((incoming2 & IO_RI) == 0x00) { // If the RI bit is clear
           RI_FLAG = false; // Clear the RI flag
         }
+        
+        LOW_POWER_MODE = ((incoming2 & IO_LOW_PWR) == IO_LOW_PWR); // Update low power mode
       }
       if (numberOfBytesReceived > 2) // Did we receive any unexpected extra data?
       {
@@ -72,6 +74,8 @@ void receiveEvent(int numberOfBytesReceived) {
       }
     }
   }
+  
+  last_activity = millis(); // Update last_activity
 }
 
 // I2C requestEvent
@@ -126,6 +130,13 @@ void requestEvent()
     }
     else {
       IO_REGISTER &= ~IO_PGOOD; // Clear the PGOOD bit in IO_REGISTER
+    }
+  
+    if (LOW_POWER_MODE) { // If low power mode is enabled
+      IO_REGISTER |= IO_LOW_PWR; // Set the low power bit in IO_REGISTER
+    }
+    else {
+      IO_REGISTER &= ~IO_LOW_PWR; // Clear the low power bit in IO_REGISTER
     }
   
     // Now write IO_REGISTER to I2C
@@ -189,4 +200,6 @@ void requestEvent()
       last_address = 0; // Reset last_address to zero
     }
   }
+
+  last_activity = millis(); // Update last_activity
 }

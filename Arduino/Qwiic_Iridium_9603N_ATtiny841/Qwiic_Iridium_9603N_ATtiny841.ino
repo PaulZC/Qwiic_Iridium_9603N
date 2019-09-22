@@ -1,13 +1,26 @@
 /*
   Qwiic Iridium 9603N
   By: Paul Clark
-  Date: 11th August 2019
+  Date: 21st September 2019
+  Version: 1.1
+
+  Change Log:
+
+  V1.1 21st September 2019
+  Added the low power mode (requested by Adam Garbo): bit 6 of the IO Register indicates if the 841 should enter
+  low power mode after sleep_after millis of inactivity. Set bit 6 high to enable the low power mode.
+
+  V1.0 11th August 2019:
+  First commit
   
   Based extensively on:
   Qwiic MP3 Trigger (April 23rd, 2018) and the SparkFun Ublox library
   By: Nathan Seidle, SparkFun Electronics
   
   License: This code is public domain but you buy me a beer if you use this and we meet someday (Beerware license).
+
+  goToSleep adapted from Jack Christensen's AVR Sleep example for the ATtinyX4:
+  https://gist.github.com/JChristensen/5616922
 
   Uses Spence Konde's ATTinyCore boards:
   https://github.com/SpenceKonde/ATTinyCore
@@ -20,10 +33,11 @@
   Set Chip to ATtiny841
   Set Clock to 8MHz(internal)
   Set BOD Level to BOD Enabled 1.8V
-  Set BOD Mode (Active) and (Sleep) to BOD Disabled
+  Set BOD Mode (Active) and (Sleep) to BOD Disabled (this helps reduce power consumption in low power mode)
   Set Save EEPROM to EEPROM Not Retained
   * Set Pin Mapping to Clockwise *
   * Set Wire Modes to Slave Only *
+  Set millis()/micros():"Enabled" to Enabled
 
   If you are using AVRDUDESS to program the ATtiny841, set the Fuses to:
   L: 0xE2 (CKDIV8 disabled, CKOUT disabled, SUT slowly rising, CKSEL internal 8MHz)
@@ -32,8 +46,8 @@
 
   Pin Allocation:
   0:  Physical Pin 13 (PA0)           : 9603N ON_OFF - pull high to enable the 9603N, pull low to disable it
-  1:  Physical Pin 12 (PA1 / TXD0)    : Serial Tx - connected to 9603N TX(IN)
-  2:  Physical Pin 11 (PA2 / RXD0)    : Serial Rx - connected to 9603N RX(OUT)
+  1:  Physical Pin 12 (PA1 / TXD0)    : Serial TXD0 - connected to 9603N TX(IN)
+  2:  Physical Pin 11 (PA2 / RXD0)    : Serial RXD0 - connected to 9603N RX(OUT)
   3:  Physical Pin 10 (PA3)           : PWR_EN - pull high to enable the 5.3V supply to the 9603N via the P-FET
   4:  Physical Pin 9  (PA4 / SCL/SCK) : I2C SCL
   5:  Physical Pin 8  (PA5 / MISO)    : MISO - connected to pin 1 of the ISP header
@@ -77,13 +91,11 @@
   The Ring Indicator bit in the IO_REGISTER is a flag set by the RI signal via INT0.
   To clear the flag: read the I/O pins; clear the IO_RI bit; write the new pin configuration.
 
-  Change log:
-  V1.0 - First commit
 */
 
 #include <Wire.h>
 
-//#include <avr/sleep.h> //Needed for sleep_mode
+#include <avr/sleep.h> //Needed for sleep_mode
 //#include <avr/power.h> //Needed for powering down perihperals such as the ADC/TWI and Timers
 
 //Define the ATtiny841's I2C address
@@ -98,15 +110,21 @@ volatile uint8_t last_address = 0; // Last receiveEvent 'address', used to defin
 volatile uint8_t serAvailLSB = 0; // Stored LSB of serial available
 volatile uint8_t serAvailMSB = 0; // Stored MSB of serial available
 
-#define SER_PACKET_SIZE 8
+#define SER_PACKET_SIZE 8 // Return up to this many bytes when reading serial data from the DATA_REG
 
 //These are the bit definitions for the IO 'register'
-const uint8_t IO_SHDN   = (1 << 0); // LTC3225 !SHDN : Read / Write
-const uint8_t IO_PWR_EN = (1 << 1); // 9603N power enable via the P-FET : Read / Write
-const uint8_t IO_ON_OFF = (1 << 2); // 9603N ON_OFF pin : Read / Write
-const uint8_t IO_RI     = (1 << 3); // 9603N Ring Indicator _flag_ : Read / Write (Set by the INT0 service routine, _cleared_ by writing a _1_ to this bit)
-const uint8_t IO_NA     = (1 << 4); // 9603N Network Available : Read only
-const uint8_t IO_PGOOD  = (1 << 5); // LTC3225 PGOOD : Read only
+const uint8_t IO_SHDN    = (1 << 0); // LTC3225 !SHDN : Read / Write
+const uint8_t IO_PWR_EN  = (1 << 1); // 9603N power enable via the P-FET : Read / Write
+const uint8_t IO_ON_OFF  = (1 << 2); // 9603N ON_OFF pin : Read / Write
+const uint8_t IO_RI      = (1 << 3); // 9603N Ring Indicator _flag_ : Read / Write (Set by the INT0 service routine, _cleared_ by writing a _1_ to this bit)
+const uint8_t IO_NA      = (1 << 4); // 9603N Network Available : Read only
+const uint8_t IO_PGOOD   = (1 << 5); // LTC3225 PGOOD : Read only
+const uint8_t IO_LOW_PWR = (1 << 6); // Low Power Mode : Read / Write : Set this bit to enable low power mode
+
+//Low Power Settings
+const unsigned long sleep_after = 1000; // Engage low power mode after this many millis (if low power mode is enabled)
+volatile unsigned long last_activity; // Used to store the value of millis when the last I2C activity took place
+volatile boolean LOW_POWER_MODE = false; // Indicates if low power mode is in use
 
 //Create the IO 'register'
 //A '1' in any of the bits indicates that the pin is ON (not necessarily that it is HIGH!)
@@ -152,7 +170,7 @@ void setup()
   digitalWrite(SHDN, SHDN__OFF); // Disable the LTC3225 supercapacitor charger
 
   // Initialize the IO_REGISTER
-  IO_REGISTER = 0; // Clear the IO register (Probably redundant. Reading the IO_REG will update it.)
+  IO_REGISTER = 0; // Clear the IO register
 
   // Digital inputs
   pinMode(PGOOD, INPUT); // Has its own pullup
@@ -171,11 +189,24 @@ void setup()
 
   //Begin listening on I2C
   startI2C();
+
+  //Initialise last_activity
+  last_activity = millis();
 }
 
 void loop()
 {
-  ; // Nothing much to do here - everything gets done by the I2C interrupts
+  if (LOW_POWER_MODE) // Is low power mode enabled?
+  {
+    // If low power mode is enabled, put the 841 into power-down mode after sleep_after millis of inactivity
+    if (millis() > (last_activity + sleep_after)) // Have we reached the inactivity limit?
+    {
+      goToSleep(); // Put the 841 into power-down mode
+      // ZZZzzz...
+      last_activity = millis(); // After waking, update last_activity so we stay awake for at least sleep_after millis
+    }
+  }
+  noIntDelay(1); // Delay for 1msec to avoid thrashing millis()
 }
 
 //Begin listening on I2C bus as I2C slave using the global I2C_ADDRESS
@@ -188,6 +219,41 @@ void startI2C()
   //The connections to the interrupts are severed when a Wire.begin occurs. So re-declare them.
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
+}
+
+//goToSleep adapted from: https://gist.github.com/JChristensen/5616922
+//Hardwired for the ATtiny441/841 (may not work on other ATtiny's)
+//Brown Out Detection is disabled via the fuse bits:
+//Set BOD Mode (Active) and (Sleep) to BOD Disabled in the board settings.
+void goToSleep(void)
+{
+    byte adcsra = ADCSRA; //save ADCSRA (ADC control and status register A)
+    ADCSRA &= ~_BV(ADEN); //disable ADC by clearing the ADEN bit
+    
+    byte acsr0a = ACSR0A; //save ACSR0A (Analog Comparator 0 control and status register)
+    ACSR0A &= ~_BV(ACIE0); //disable AC0 interrupt
+    ACSR0A |= _BV(ACD0); //disable ACO by setting the ACD0 bit
+    
+    byte acsr1a = ACSR1A; //save ACSR1A (Analog Comparator 1 control and status register)
+    ACSR1A &= ~_BV(ACIE1); //disable AC1 interrupt
+    ACSR1A |= _BV(ACD1); //disable AC1 by setting the ACD1 bit
+    
+    byte prr = PRR; // Save the power reduction register
+    // Disable the ADC, USART1, SPI, Timer1 and Timer2
+    // (Leave TWI, USART0 and Timer0 enabled)
+    PRR |= _BV(PRADC) | _BV(PRUSART1) | _BV(PRSPI) | _BV(PRTIM1) | _BV(PRTIM2); 
+    
+    byte mcucr = MCUCR; // Save the MCU Control Register
+    // Set Sleep Enable (SE=1), Power-down Sleep Mode (SM1=1, SM0=0), INT0 Falling Edge (ISC01=1, ISC00=0)
+    MCUCR = _BV(SE) | _BV(SM1) | _BV(ISC01);
+
+    sleep_cpu(); //go to sleep
+    
+    MCUCR = mcucr; // Restore the MCU control register
+    PRR = prr; // Restore the power reduction register
+    ACSR1A = acsr1a; // Restore ACSR1A    
+    ACSR0A = acsr0a; // Restore ACSR0A    
+    ADCSRA = adcsra; //Restore ADCSRA
 }
 
 //Software delay. Does not rely on internal timers.

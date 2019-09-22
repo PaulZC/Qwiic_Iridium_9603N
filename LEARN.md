@@ -103,6 +103,7 @@ The power control functions in the library are:
 - _enableSuperCapCharger(true)_ will enable the LTC3225 by pulling !SHDN high
 - _checkSuperCapCharger()_ will return true when PGOOD has gone high
 - _enable9603Npower(true)_ will enable power for the 9603N by pulling PWR_EN high
+- _enable841lowPower(true)_ will enable the ATtiny841's low power mode, substantially reducing the standby current
 
 ## ATtiny841
 
@@ -152,7 +153,7 @@ The WireS library for the 841 doesn't like it if the Master holds the bus betwee
 The bit definitions for the IO_REG are:
 
 - Bit 7: Not Used
-- Bit 6: Not Used
+- Bit 6: LOW_PWR - Read/Write - this bit enables/disables the ATtiny841's low power mode. Writing 1 to this bit enables low power mode
 - Bit 5: PGOOD - Read Only - this bit will be high when the LTC3225 PGOOD signal is high
 - Bit 4: NA - Read Only - this bit will be high when the 9603N Network Available pin is high
 - Bit 3: RI - Read/Write - this bit is a flag which is set when the 9603N Ring Indicator pin pulses low. The flag can be cleared by writing a 0 to this bit
@@ -272,6 +273,7 @@ When compiling the code:
 - Set Save EEPROM to EEPROM Not Retained
 - **Set Pin Mapping to Clockwise**
 - **Set Wire Modes to Slave Only**
+- Set millis()/micros():"Enabled" to Enabled
 
 The code has been tested using Arduino 1.8.9 **but using version 1.6.21 of the Arduino AVR Boards**. At the time of writing, later versions contain a
 bug in the compiler tool chain which causes segmentation faults. Please see the [Gotchas List in Spence's repo](https://github.com/SpenceKonde/ATTinyCore#quick-gotcha-list).
