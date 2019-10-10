@@ -5886,6 +5886,8 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="19.812" y1="15.836" x2="19.392" y2="16.256" width="0.6096" layer="1"/>
 <wire x1="18.503" y1="16.256" x2="19.392" y2="16.256" width="0.6096" layer="1"/>
 <wire x1="19.812" y1="15.748" x2="19.812" y2="15.836" width="0.6096" layer="1"/>
+<wire x1="20.822" y1="16.377" x2="20.193" y2="15.748" width="0.6096" layer="1"/>
+<wire x1="19.812" y1="15.748" x2="20.193" y2="15.748" width="0.6096" layer="1"/>
 <wire x1="2.54" y1="16.51" x2="6.731" y2="20.701" width="0.6096" layer="16"/>
 <wire x1="6.731" y1="20.701" x2="6.731" y2="25.908" width="0.6096" layer="16"/>
 <via x="33.401" y="27.813" extent="1-16" drill="0.6"/>
@@ -5925,8 +5927,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="43.815" y1="14.605" x2="43.18" y2="15.24" width="0.3048" layer="16"/>
 <wire x1="43.18" y1="15.24" x2="41.529" y2="15.24" width="0.3048" layer="16"/>
 <contactref element="U1" pad="1"/>
-<wire x1="20.955" y1="16.377" x2="20.326" y2="15.748" width="0.6096" layer="1"/>
-<wire x1="20.326" y1="15.748" x2="19.812" y2="15.748" width="0.6096" layer="1"/>
+<wire x1="20.822" y1="16.377" x2="20.955" y2="16.377" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND">
 <polygon width="0.254" layer="16" isolate="0.3048" rank="2">
@@ -6145,7 +6146,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <signal name="SDA_PU1">
 <contactref element="R3" pad="2"/>
 <contactref element="JP2" pad="3"/>
-<wire x1="4.064" y1="35.56" x2="4.064" y2="33.87" width="0.3048" layer="1"/>
+<wire x1="4.064" y1="35.56" x2="4.064" y2="33.87" width="0.254" layer="1"/>
 </signal>
 <signal name="!RST">
 <contactref element="R4" pad="1"/>
@@ -6162,10 +6163,10 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="19.05" y1="8.89" x2="27.94" y2="8.89" width="0.3048" layer="1"/>
 <wire x1="27.94" y1="8.89" x2="29.21" y2="7.62" width="0.3048" layer="1"/>
 <wire x1="29.21" y1="7.62" x2="29.21" y2="1.27" width="0.3048" layer="1"/>
+<wire x1="24.765" y1="16.51" x2="24.003" y2="17.272" width="0.3048" layer="1"/>
 <wire x1="24.003" y1="17.272" x2="16.803" y2="17.272" width="0.3048" layer="1"/>
 <contactref element="U1" pad="4"/>
-<wire x1="24.765" y1="16.377" x2="24.765" y2="16.51" width="0.3048" layer="1"/>
-<wire x1="24.765" y1="16.51" x2="24.003" y2="17.272" width="0.3048" layer="1"/>
+<wire x1="24.765" y1="16.51" x2="24.765" y2="16.377" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MISO">
 <contactref element="J6" pad="1"/>
@@ -6303,11 +6304,11 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="31.75" y1="1.27" x2="31.75" y2="10.541" width="0.6096" layer="16"/>
 <wire x1="34.163" y1="12.954" x2="31.75" y2="10.541" width="0.6096" layer="16"/>
 <wire x1="34.163" y1="12.954" x2="34.163" y2="19.05" width="0.6096" layer="16"/>
+<wire x1="24.948" y1="34.6" x2="24.892" y2="34.544" width="0.6096" layer="1"/>
 <contactref element="Q2" pad="2"/>
 <wire x1="28.21" y1="33.798" x2="28.21" y2="34.61" width="0.6096" layer="1"/>
 <wire x1="27.432" y1="33.02" x2="28.21" y2="33.798" width="0.6096" layer="1"/>
-<wire x1="28.21" y1="34.61" x2="24.958" y2="34.61" width="0.6096" layer="1"/>
-<wire x1="24.958" y1="34.61" x2="24.892" y2="34.544" width="0.6096" layer="1"/>
+<wire x1="25.781" y1="32.258" x2="24.5" y2="32.155" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="!SHDN">
 <contactref element="U2" pad="4"/>
@@ -6503,7 +6504,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="38.735" y1="43.942" x2="39.37" y2="44.577" width="0.8128" layer="1" curve="-90"/>
 <wire x1="40.005" y1="45.212" x2="39.37" y2="44.577" width="0.8128" layer="1" curve="-90"/>
 <contactref element="E1" pad="SIG"/>
-<wire x1="40.005" y1="48.387" x2="40.005" y2="45.212" width="0.8128" layer="1"/>
+<wire x1="40.005" y1="45.212" x2="40.005" y2="48.387" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$8">
 <contactref element="R9" pad="1"/>

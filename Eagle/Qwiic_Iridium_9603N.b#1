@@ -6145,7 +6145,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <signal name="SDA_PU1">
 <contactref element="R3" pad="2"/>
 <contactref element="JP2" pad="3"/>
-<wire x1="4.064" y1="35.56" x2="4.064" y2="33.87" width="0.3048" layer="1"/>
+<wire x1="4.064" y1="35.56" x2="4.064" y2="33.87" width="0.254" layer="1"/>
 </signal>
 <signal name="!RST">
 <contactref element="R4" pad="1"/>
