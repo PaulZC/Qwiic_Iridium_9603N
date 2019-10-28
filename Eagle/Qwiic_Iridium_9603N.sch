@@ -10028,6 +10028,7 @@ with 4 mil gap </text>
 <text x="213.36" y="144.78" size="3.81" layer="97" ratio="15" align="top-center">Inrush
 Current
 Limit</text>
+<text x="160.02" y="1.524" size="2.1844" layer="94">10/28/2019</text>
 </plain>
 <instances>
 <instance part="JP3" gate="G$1" x="246.38" y="30.48" smashed="yes"/>
@@ -10056,7 +10057,6 @@ Limit</text>
 </instance>
 <instance part="FRAME1" gate="G$1" x="0" y="0" smashed="yes"/>
 <instance part="FRAME1" gate="V" x="147.32" y="0" smashed="yes">
-<attribute name="LAST_DATE_TIME" x="160.02" y="1.27" size="2.54" layer="94" font="vector"/>
 <attribute name="SHEET" x="233.68" y="1.27" size="2.54" layer="94" font="vector"/>
 <attribute name="DRAWING_NAME" x="162.814" y="17.78" size="2.7432" layer="94" font="vector"/>
 </instance>
@@ -10339,7 +10339,6 @@ Limit</text>
 </instance>
 <instance part="E1" gate="G$1" x="154.94" y="76.2" smashed="yes" rot="R270">
 <attribute name="NAME" x="149.86" y="70.612" size="1.778" layer="95" font="vector" rot="R270"/>
-<attribute name="VALUE" x="147.574" y="70.612" size="1.778" layer="96" font="vector" rot="R270"/>
 </instance>
 <instance part="U1" gate="U1" x="38.1" y="76.2" smashed="yes">
 <attribute name="NAME" x="22.86" y="94.742" size="1.778" layer="95"/>
@@ -10347,7 +10346,6 @@ Limit</text>
 </instance>
 <instance part="Q2" gate="NMOS" x="228.6" y="175.26" smashed="yes" rot="R90">
 <attribute name="NAME" x="228.6" y="180.34" size="1.778" layer="95" font="vector" rot="R90"/>
-<attribute name="VALUE" x="231.14" y="180.34" size="1.778" layer="96" font="vector" rot="R90"/>
 </instance>
 </instances>
 <busses>

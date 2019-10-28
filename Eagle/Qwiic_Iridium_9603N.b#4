@@ -5886,8 +5886,6 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="19.812" y1="15.836" x2="19.392" y2="16.256" width="0.6096" layer="1"/>
 <wire x1="18.503" y1="16.256" x2="19.392" y2="16.256" width="0.6096" layer="1"/>
 <wire x1="19.812" y1="15.748" x2="19.812" y2="15.836" width="0.6096" layer="1"/>
-<wire x1="20.193" y1="15.748" x2="20.6375" y2="16.1925" width="0.6096" layer="1"/>
-<wire x1="19.812" y1="15.748" x2="20.193" y2="15.748" width="0.6096" layer="1"/>
 <wire x1="2.54" y1="16.51" x2="6.731" y2="20.701" width="0.6096" layer="16"/>
 <wire x1="6.731" y1="20.701" x2="6.731" y2="25.908" width="0.6096" layer="16"/>
 <via x="33.401" y="27.813" extent="1-16" drill="0.6"/>
@@ -5927,8 +5925,8 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="43.815" y1="14.605" x2="43.18" y2="15.24" width="0.3048" layer="16"/>
 <wire x1="43.18" y1="15.24" x2="41.529" y2="15.24" width="0.3048" layer="16"/>
 <contactref element="U1" pad="1"/>
-<wire x1="20.6375" y1="16.1925" x2="20.822" y2="16.377" width="0.3048" layer="1"/>
-<wire x1="20.822" y1="16.377" x2="20.955" y2="16.377" width="0" layer="19" extent="1-1"/>
+<wire x1="20.955" y1="16.377" x2="20.326" y2="15.748" width="0.6096" layer="1"/>
+<wire x1="20.326" y1="15.748" x2="19.812" y2="15.748" width="0.6096" layer="1"/>
 </signal>
 <signal name="GND">
 <polygon width="0.254" layer="16" isolate="0.3048" rank="2">

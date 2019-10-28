@@ -6503,7 +6503,7 @@ These rules have been curated by SparkFuns DFM commitee. After doing much resear
 <wire x1="38.735" y1="43.942" x2="39.37" y2="44.577" width="0.8128" layer="1" curve="-90"/>
 <wire x1="40.005" y1="45.212" x2="39.37" y2="44.577" width="0.8128" layer="1" curve="-90"/>
 <contactref element="E1" pad="SIG"/>
-<wire x1="40.005" y1="45.212" x2="40.005" y2="48.387" width="0" layer="19" extent="1-1"/>
+<wire x1="40.005" y1="48.387" x2="40.005" y2="45.212" width="0.8128" layer="1"/>
 </signal>
 <signal name="N$8">
 <contactref element="R9" pad="1"/>
