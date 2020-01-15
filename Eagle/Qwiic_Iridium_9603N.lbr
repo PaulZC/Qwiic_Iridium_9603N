@@ -24,7 +24,7 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="yes" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
@@ -256,9 +256,11 @@ by exp-lbrs.ulp</description>
 <smd name="8" x="0.9398" y="0" dx="0.7112" dy="0.254" layer="1"/>
 <smd name="9" x="0.9398" y="0.508" dx="0.7112" dy="0.254" layer="1"/>
 <smd name="10" x="0.9398" y="0.9906" dx="0.7112" dy="0.254" layer="1"/>
-<smd name="11" x="0" y="0" dx="0.635" dy="2.3876" layer="1"/>
+<smd name="11" x="0" y="0" dx="0.635" dy="2.3876" layer="1" cream="no"/>
 <text x="-2.2606" y="-3.556" size="1.016" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-2.8194" y="2.54" size="1.016" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
+<rectangle x1="-0.127" y1="0.381" x2="0.127" y2="1.016" layer="31"/>
+<rectangle x1="-0.127" y1="-1.016" x2="0.127" y2="-0.381" layer="31"/>
 </package>
 <package name="IRIDIUM_9603N">
 <description>0.4mm[.016] SOCKET STRIP ASSEMBLY.</description>

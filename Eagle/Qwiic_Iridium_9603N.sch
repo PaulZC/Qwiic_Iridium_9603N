@@ -8625,9 +8625,11 @@ by exp-lbrs.ulp</description>
 <smd name="8" x="0.9398" y="0" dx="0.7112" dy="0.254" layer="1"/>
 <smd name="9" x="0.9398" y="0.508" dx="0.7112" dy="0.254" layer="1"/>
 <smd name="10" x="0.9398" y="0.9906" dx="0.7112" dy="0.254" layer="1"/>
-<smd name="11" x="0" y="0" dx="0.635" dy="2.3876" layer="1"/>
+<smd name="11" x="0" y="0" dx="0.635" dy="2.3876" layer="1" cream="no"/>
 <text x="-2.2606" y="-3.556" size="1.016" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-2.8194" y="2.54" size="1.016" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
+<rectangle x1="-0.127" y1="0.381" x2="0.127" y2="1.016" layer="31"/>
+<rectangle x1="-0.127" y1="-1.016" x2="0.127" y2="-0.381" layer="31"/>
 </package>
 <package name="ATTINY841">
 <circle x="-4.28625" y="-2.38125" radius="0.1016" width="0.2032" layer="21"/>
