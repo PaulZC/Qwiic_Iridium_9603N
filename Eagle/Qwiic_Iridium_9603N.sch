@@ -8567,8 +8567,6 @@ by exp-lbrs.ulp</description>
 <smd name="18" x="8.6" y="23.165" dx="1.2" dy="0.23" layer="1" rot="R90" cream="no"/>
 <smd name="19" x="8.2" y="28.035" dx="1.2" dy="0.23" layer="1" rot="R90" cream="no"/>
 <smd name="20" x="8.2" y="23.165" dx="1.2" dy="0.23" layer="1" rot="R90" cream="no"/>
-<pad name="HOLE1" x="0" y="0" drill="3.73" diameter="5.6"/>
-<pad name="HOLE2" x="25" y="0" drill="3.73" diameter="5.6"/>
 <text x="6.76" y="19.98" size="1.27" layer="25" ratio="15">&gt;NAME</text>
 <text x="6.76" y="18.22" size="1.27" layer="27" ratio="15">&gt;VALUE</text>
 <rectangle x1="8.5" y1="27.5" x2="8.7" y2="28.5" layer="31"/>
@@ -8594,6 +8592,16 @@ by exp-lbrs.ulp</description>
 <wire x1="7.73" y1="22.55" x2="6.14" y2="22.55" width="0.15" layer="21"/>
 <wire x1="7.73" y1="28.65" x2="6.14" y2="28.65" width="0.15" layer="21"/>
 <wire x1="13.03" y1="28.65" x2="12.34" y2="28.65" width="0.15" layer="21"/>
+<pad name="HOLE1" x="0" y="0" drill="3.7" diameter="6.2"/>
+<wire x1="0.9" y1="2.3" x2="2.3" y2="0.9" width="1.25" layer="31" curve="-44.643228"/>
+<pad name="HOLE2" x="25" y="0" drill="3.7" diameter="6.2"/>
+<wire x1="2.3" y1="-0.9" x2="0.9" y2="-2.3" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="-0.9" y1="-2.3" x2="-2.3" y2="-0.9" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="-2.3" y1="0.9" x2="-0.9" y2="2.3" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="25.9" y1="2.3" x2="27.3" y2="0.9" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="27.3" y1="-0.9" x2="25.9" y2="-2.3" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="24.1" y1="-2.3" x2="22.7" y2="-0.9" width="1.25" layer="31" curve="-44.643228"/>
+<wire x1="22.7" y1="0.9" x2="24.1" y2="2.3" width="1.25" layer="31" curve="-44.643228"/>
 </package>
 <package name="DFN300X200-10L">
 <wire x1="0.4572" y1="-1.4986" x2="0.9906" y2="-1.4986" width="0.1524" layer="21"/>
