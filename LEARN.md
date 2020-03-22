@@ -69,7 +69,7 @@ If you want to power the Qwiic Iridium 9603N from a low current source, e.g. sol
 changing the JP1 jumper link. The current draw from the Qwiic interface falls to approximately 80mA. The 60mA charge current is enough
 to offset the average current draw during receive, but bigger supercapacitors are needed to deliver the average current draw during a complete
 receive/transmit cycle. So, if you do change the charge current to 60mA, you will also need to solder additional 10 Farad supercapacitors on to
-the rear of the PCB using the solder pads provided. Please see the BOM for the capacitor part numbers.
+the rear of the PCB using the solder pads provided.
 
 The datasheet for the 9603N states that it can have a very low impedance when unpowered, leading to a large inrush current when the power is enabled.
 The power supply circuit needs to limit the inrush current to a maximum of 4 Amps. To achieve this, the Qwiic Iridium 9603N uses an
