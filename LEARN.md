@@ -125,7 +125,7 @@ so you can develop your own Wire functions should you want to.
 ## I2C (Wire) Interface
 
 The Qwiic Iridium 9603N emulates a slave I2C device with a fixed address of 0x63. You can change the address but only by editing the
-[Arduino code](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Arduino/Qwiic_Iridium_9603N_ATtiny841/Qwiic_Iridium_9603N_ATtiny841.ino#L102).
+[Arduino code](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Arduino/Qwiic_Iridium_9603N_ATtiny841/Qwiic_Iridium_9603N_ATtiny841.ino#L90).
 
 The code in the ATtiny841 emulates three read/write 'registers':
 
