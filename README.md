@@ -29,9 +29,6 @@ The Eagle files are available in the [Eagle folder](https://github.com/PaulZC/Qw
 
 The schematic is available [here](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/img/Schematic.png).
 
-The BOM is available [here](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Qwiic_Iridium_9603N_BOM.pdf) in PDF format
-and [here](https://github.com/PaulZC/Qwiic_Iridium_9603N/blob/master/Qwiic_Iridium_9603N_BOM.xlsx) in Excel .xlsx format.
-
 ## Acknowledgements
 
 This project is based extensively on the Qwiic MP3 Trigger and the SparkFun Ublox library by Nathan Seidle of SparkFun Electronics.
