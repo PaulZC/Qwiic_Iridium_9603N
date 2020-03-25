@@ -635,7 +635,7 @@ It has a reduced top mask to make it harder to install upside-down.</description
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="RES-08595"/>
+<attribute name="PROD_ID" value="RES-14417"/>
 <attribute name="VALUE" value="30.1k"/>
 </technology>
 </technologies>
@@ -9425,7 +9425,7 @@ Requires two HW-14879 M2x0.4 Steel 6mm standoffs</description>
 </devices>
 </deviceset>
 <deviceset name="1F-2.7V(PTH)" prefix="C" uservalue="yes">
-<description>1F 2.7V SuperCapacitor CAP-08070</description>
+<description>1F 2.7V SuperCapacitor CAP-14696</description>
 <gates>
 <gate name="G$1" symbol="CAP_POL" x="0" y="0"/>
 </gates>
@@ -9437,7 +9437,7 @@ Requires two HW-14879 M2x0.4 Steel 6mm standoffs</description>
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="CAP-08070" constant="no"/>
+<attribute name="PROD_ID" value="CAP-14696" constant="no"/>
 </technology>
 </technologies>
 </device>
